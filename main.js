@@ -1,4 +1,3 @@
-// Données des cours (à personnaliser selon vos besoins)
 const coursesData = {
     S3: [
         { id: 'Algèbre_3', name: 'Algèbre 3', icon: 'fas fa-square-root-alt' },
@@ -435,6 +434,8 @@ semesterCards.forEach(card => {
     card.addEventListener('click', () => {
         const semester = card.dataset.semester;
         displayCourses(semester);
+        // Scroll to courses container
+        coursesContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 });
 
