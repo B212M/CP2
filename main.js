@@ -415,16 +415,30 @@ const searchInput = document.getElementById('searchInput');
 searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase();
     const allCourses = document.querySelectorAll('.course-card');
-    
+    let hasMatch = false; // Check if at least one course matches
+
     allCourses.forEach(course => {
         const courseName = course.querySelector('h3').textContent.toLowerCase();
         if (courseName.includes(searchTerm)) {
             course.style.display = 'block';
+            hasMatch = true; // A match was found
         } else {
             course.style.display = 'none';
         }
     });
+
+    // Only scroll to the top if there are no matches and the search term is empty
+    if (searchTerm === '' || !hasMatch) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (hasMatch) {
+        // If matches exist, scroll smoothly to the bottom
+        setTimeout(() => {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }, 300); // Small delay to ensure the search results are updated before scrolling
+    }
 });
+
+
 
 // Affichage des cours par semestre
 const semesterCards = document.querySelectorAll('.semester-card');
